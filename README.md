@@ -3,7 +3,7 @@ WeatherApp is a simple and intuitive weather application for Android, built usin
 
 # Features
 - Current Weather: Get real-time weather updates for your current location.
-- Interactive UI: Enjoy a smooth and interactive user experience.
+- Appealing UI: Enjoy a smooth and pleasant user experience.
 
 # Screenshots
 <p align="center">
