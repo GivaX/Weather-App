@@ -1,5 +1,5 @@
 # WeatherApp
-WeatherApp is a simple and intuitive weather application for Android, built using Flutter and Dart. It provides users accurate and up-to-date weather information, helping them plan their day effectively.
+WeatherApp is a simple and intuitive weather application for Android, built using Flutter and Dart. It provides users with accurate and up-to-date weather information, helping them plan their day effectively.
 
 # Features
 1. Current Weather: Get real-time weather updates for your current location.
@@ -7,14 +7,22 @@ WeatherApp is a simple and intuitive weather application for Android, built usin
 
 # Screenshots
 Requests user's location:
-![image](https://github.com/GivaX/Weather-App/assets/85905545/bfa46427-5634-4b43-b66b-aea02746f4ae)
+<p align="center">
+    <img src="https://github.com/GivaX/Weather-App/assets/85905545/bfa46427-5634-4b43-b66b-aea02746f4ae" width="50%" height="50%">
+</p>
 
-![image](https://github.com/GivaX/Weather-App/assets/85905545/9e9a5c8f-688c-4876-ac9a-d3de94e29549)
+<p align="center">
+    <img src="https://github.com/GivaX/Weather-App/assets/85905545/9e9a5c8f-688c-4876-ac9a-d3de94e29549" width="50%" height="50%">
+</p>
 
 Refreshing:
-![image](https://github.com/GivaX/Weather-App/assets/85905545/38844a93-e980-445a-afc8-80bcab6627eb)
+<p align="center">
+    <img src="https://github.com/GivaX/Weather-App/assets/85905545/38844a93-e980-445a-afc8-80bcab6627eb" width="50%" height="50%">
+</p>
 
-![image](https://github.com/GivaX/Weather-App/assets/85905545/78fb847a-4d7c-4d9f-a0cf-4be13146b959)
+<p align="center">
+    <img src="https://github.com/GivaX/Weather-App/assets/85905545/78fb847a-4d7c-4d9f-a0cf-4be13146b959" width="50%" height="50%">
+</p>
 
 # Installation
 Clone this repository to your local machine:
