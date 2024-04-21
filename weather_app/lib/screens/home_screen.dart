@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
     } else if (toDouble(TimeOfDay.now()) > 12 &&
-        toDouble(TimeOfDay.now()) < 14.98) {
+        toDouble(TimeOfDay.now()) < 16.98) {
       return const Text(
         'Good Afternoon',
         style: TextStyle(
