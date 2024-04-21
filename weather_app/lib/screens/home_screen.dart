@@ -5,10 +5,53 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/bloc/weather_bloc_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  Widget getWeatherIcon(int code) {
+    switch (code) {
+      case >= 200 && < 300:
+        return Image.asset(
+          'assets/1.png',
+        );
+      case >= 300 && < 400:
+        return Image.asset(
+          'assets/2.png',
+        );
+      case >= 500 && < 600:
+        return Image.asset(
+          'assets/3.png',
+        );
+      case >= 600 && < 700:
+        return Image.asset(
+          'assets/4.png',
+        );
+      case >= 700 && < 800:
+        return Image.asset(
+          'assets/5.png',
+        );
+      case 800:
+        return Image.asset(
+          'assets/6.png',
+        );
+      case >= 801 && < 805:
+        return Image.asset(
+          'assets/7.png',
+        );
+      default:
+        return Image.asset(
+          'assets/6.png',
+        );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,41 +82,6 @@ class HomeScreen extends StatelessWidget {
             child: SizedBox(
               height: MediaQuery.of(context).size.height,
               child: Stack(children: [
-                // Align(
-                //   alignment: const AlignmentDirectional(0, -1.3),
-                //   child: Container(
-                //     height: MediaQuery.of(context).size.height / 2,
-                //     width: MediaQuery.of(context).size.width,
-                //     decoration: const BoxDecoration(
-                //         //shape: BoxShape.circle,
-                //         color: Color.fromARGB(255, 52, 152, 219)),
-                //   ),
-                // ),
-                // Align(
-                //   alignment: const AlignmentDirectional(0, 1.2),
-                //   child: Container(
-                //     height: MediaQuery.of(context).size.height / 2,
-                //     width: MediaQuery.of(context).size.width,
-                //     decoration: const BoxDecoration(
-                //         color: Color.fromARGB(255, 0, 14, 23)),
-                //   ),
-                // ),
-                // Align(
-                //   alignment: const AlignmentDirectional(0, 0),
-                //   child: Container(
-                //     height: MediaQuery.of(context).size.height / 3,
-                //     width: MediaQuery.of(context).size.width,
-                //     decoration: const BoxDecoration(
-                //         //shape: BoxShape.circle,
-                //         color: Color.fromARGB(255, 98, 0, 255)),
-                //   ),
-                // ),
-                // BackdropFilter(
-                //   filter: ImageFilter.blur(sigmaX: 100.0, sigmaY: 100.0),
-                //   child: Container(
-                //     decoration: const BoxDecoration(color: Colors.transparent),
-                //   ),
-                // ),
                 BlocBuilder<WeatherBlocBloc, WeatherBlocState>(
                   builder: (context, state) {
                     if (state is WeatherBlocSuccess) {
@@ -86,6 +94,7 @@ class HomeScreen extends StatelessWidget {
                             Text(
                               '📍 ${state.weather.areaName}',
                               style: const TextStyle(
+                                //fontSize: 18,
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
@@ -97,12 +106,10 @@ class HomeScreen extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Image.asset(
-                              'assets/3.png',
-                            ),
+                            getWeatherIcon(state.weather.weatherConditionCode!),
                             Center(
                               child: Text(
-                                '${state.weather.temperature}',
+                                '${state.weather.temperature!.celsius!.round()}°C',
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 50,
@@ -112,7 +119,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Center(
                               child: Text(
-                                '${state.weather.weatherDescription}',
+                                state.weather.weatherMain!,
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 25,
@@ -122,7 +129,10 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Center(
                               child: Text(
-                                '${state.weather.date}',
+                                DateFormat('EEEE dd ·')
+                                    .add_jm()
+                                    .format(state.weather.date!),
+                                //'${state.weather.date}',
                                 style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -157,7 +167,9 @@ class HomeScreen extends StatelessWidget {
                                           height: 3,
                                         ),
                                         Text(
-                                          '6:51am',
+                                          DateFormat()
+                                              .add_jm()
+                                              .format(state.weather.sunrise!),
                                           style: const TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w600),
@@ -189,7 +201,9 @@ class HomeScreen extends StatelessWidget {
                                           height: 3,
                                         ),
                                         Text(
-                                          '8:02pm',
+                                          DateFormat()
+                                              .add_jm()
+                                              .format(state.weather.sunset!),
                                           style: const TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w600),
@@ -230,7 +244,7 @@ class HomeScreen extends StatelessWidget {
                                           height: 3,
                                         ),
                                         Text(
-                                          '9',
+                                          '${state.weather.tempMin!.celsius!.round()}°C',
                                           style: const TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w600),
@@ -262,7 +276,7 @@ class HomeScreen extends StatelessWidget {
                                           height: 3,
                                         ),
                                         Text(
-                                          '15',
+                                          '${state.weather.tempMax!.celsius!.round()}°C',
                                           style: const TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.w600),
