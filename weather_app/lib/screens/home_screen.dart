@@ -1,5 +1,7 @@
 import 'dart:math' as math;
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -17,6 +19,48 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  double toDouble(TimeOfDay time) {
+    return time.hour + time.minute / 60;
+  }
+
+  Widget getGreeting() {
+    if (toDouble(TimeOfDay.now()) > 0 && toDouble(TimeOfDay.now()) < 11.98) {
+      return const Text(
+        'Good Morning',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    } else if (toDouble(TimeOfDay.now()) > 12 &&
+        toDouble(TimeOfDay.now()) < 14.98) {
+      return const Text(
+        'Good Afternoon',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    } else if (toDouble(TimeOfDay.now()) > 17 &&
+        toDouble(TimeOfDay.now()) < 0.98) {
+      return const Text(
+        'Good Evening',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    } else {
+      return const Text(
+        'Sup',
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    }
+  }
+
   Widget getWeatherIcon(
       int code, DateTime currentTime, DateTime sunrise, DateTime sunset) {
     if ((currentTime.compareTo(sunset) > 0) ||
@@ -113,6 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         body: RefreshIndicator(
           onRefresh: () async {
+            getGreeting();
             Position position = await determinePosition();
             BlocProvider.of<WeatherBlocBloc>(context)
                 .add(FetchWeather(position));
@@ -141,13 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                                 const SizedBox(height: 8),
-                                const Text(
-                                  'Good Morning',
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                getGreeting(),
                                 getWeatherIcon(
                                     state.weather.weatherConditionCode!,
                                     state.weather.date!,
